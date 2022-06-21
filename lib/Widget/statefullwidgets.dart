@@ -6,8 +6,11 @@ import 'package:untitled1/modal/studyprogram.dart';
 
 date da = date();
 studyprogramlist studyprograms = studyprogramlist();
+workprogramlist workprograms = workprogramlist();
+
 class StudyField extends StatefulWidget {
-  StudyField({Key? key}) : super(key: key);
+  StudyField(this.num, {Key? key}) : super(key: key);
+  int num;
 
   // StudyField(this.cntrstudyprogram, this.cntrplaceofedu, this.cntrcgpa,
   //     this.cntrproject, this.cntrskill);
@@ -142,7 +145,7 @@ class StudyFieldState extends State<StudyField> {
                   cntrproject.text.toString(),
                 );
 
-                studyprograms.getstudyprogram(stdypr);
+                studyprograms.setstudyprogram(widget.num, stdypr);
               },
               child: Container(
                   padding: EdgeInsets.all(10),
@@ -157,7 +160,7 @@ class StudyFieldState extends State<StudyField> {
                     ),
                   )),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -196,7 +199,8 @@ class StudyFieldState extends State<StudyField> {
 }
 
 class WorkField extends StatefulWidget {
-  const WorkField({Key? key}) : super(key: key);
+  WorkField(this.num, {Key? key}) : super(key: key);
+  int num;
 
   @override
   State<WorkField> createState() => _WorkFieldState();
@@ -309,6 +313,41 @@ class _WorkFieldState extends State<WorkField> {
             enbldbrdrclr: Colors.white,
             fcdbordrclr: Colors.blue,
           ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: InkWell(
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    dismissDirection: DismissDirection.vertical,
+                    backgroundColor: Colors.amber.shade900,
+                    content: Container(
+                      height: 100,
+                      child: Text("Saving ${cntrwrk.text.toString()}"),
+                    )));
+                workprogram workpr = workprogram(
+                  cntrtitle.text.toString(),
+                  cntrwrk.text.toString(),
+                  cntrcmpnydisci.text.toString(),
+                  cntrref.text.toString(),
+                  cntrcompcontcnu.text.toString(),
+                );
+
+                workprograms.setworkprogram(widget.num, workpr);
+              },
+              child: Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.amber.shade300,
+                  ),
+                  child: Text(
+                    "Save",
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                  )),
+            ),
+          )
         ],
       ),
     );

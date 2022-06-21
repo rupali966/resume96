@@ -219,13 +219,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                         size: 12,
                                         str: "Study Program ${i + 1}",
                                         bgclr: Colors.white),
-                                    StudyField(
-                                      cntrstudyprogram0,
-                                      cntrplaceofedu,
-                                      cntrcgpa,
-                                      cntrproject,
-                                      cntrskill,
-                                    ),
+                                    StudyField(i),
                                   ]);
                             }),
                         // StudyField(),
@@ -280,7 +274,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                                         size: 12,
                                         str: "Reference ${i + 1}",
                                         bgclr: Colors.white),
-                                    WorkField(),
+                                    WorkField(i),
                                   ]);
                             }),
                         Row(
