@@ -2,11 +2,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:untitled1/Widget/statefullwidgets.dart';
 import 'package:untitled1/Widget/textwidgets.dart';
 import 'package:untitled1/Widget/widgets.dart';
 import 'package:pdf/pdf.dart';
 import 'package:untitled1/modal/dataofuser.dart';
-
+import 'package:untitled1/modal/studyprogram.dart';
+studyprogramlist study = studyprograms;
+workprogramlist work = workprograms;
 class Uithree extends StatefulWidget {
   const Uithree({Key? key}) : super(key: key);
 
@@ -62,9 +65,9 @@ class _UithreeState extends State<Uithree> {
                     ),
                   ),
                   Txt().smalltxt(
-                    str: "Personal Details",
+                    str: "Personal Details".toUpperCase(),
                     bgclr: Colors.white,
-                    size: 20,
+                    size: 18,
                   ),
                   Txt().smalltxt(
                     str: "Name : ${data.name}",
@@ -79,35 +82,104 @@ class _UithreeState extends State<Uithree> {
                     str: "Ph No. : ${data.phno}",
                   ),
                   Txt().smalltxt(
-                    str: "Professional Details",
-                    bgclr: Colors.white,
-                    size: 20,
-                  ),
-                  Txt().smalltxt(
                     str: "About : ${data.aboutyourself}",
                   ),
                   Txt().smalltxt(
-                      str: "Skills : ${data.skill} , ${data.skill2}"
-                  ),
-                  Txt().smalltxt(
-                    str: data.school,
+                    str: "Educational Details".toUpperCase(),
                     bgclr: Colors.white,
+                    size: 18,
                   ),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: study.placeofeducation.length,
+                      itemBuilder: (context, i) {
+                        return Align(
+                          alignment: Alignment.topLeft,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Txt().smalltxt(
+                                  str: "Study Program ${i + 1}".toUpperCase(),
+                                  bgclr: Colors.white,
+                                  size: 14),
+                              Txt().smalltxt(
+                                  str:
+                                  "Degree/course : ${study.studyprograms[i].toString().toUpperCase()}",
+                                  bgclr: Colors.white,
+                                  size: 12),
+                              Txt().smalltxt(
+                                  str:
+                                  "Place of Education : ${study.placeofeducation[i].toString().toUpperCase()}",
+                                  bgclr: Colors.white,
+                                  size: 12),
+                              Txt().smalltxt(
+                                  str:
+                                  "CGPA : ${study.cgpa[i].toString().toUpperCase()}",
+                                  bgclr: Colors.white,
+                                  size: 12),
+                              Txt().smalltxt(
+                                  str:
+                                  "Projects : ${study.project[i].toString().toUpperCase()}",
+                                  bgclr: Colors.white,
+                                  size: 12),
+                            ],
+                          ),
+                        );
+                      }),
                   Txt().smalltxt(
-                    str: data.cource,
+                    str: "Experience".toUpperCase(),
                     bgclr: Colors.white,
+                    size: 18,
                   ),
-                  Txt().smalltxt(
-                    str: "Year of Passing : ${data.yearofpassing}",
-                    bgclr: Colors.white,
-                  ),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: work.title.length,
+                      itemBuilder: (context, i) {
+                        return Align(
+                          alignment: Alignment.topLeft,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Txt().smalltxt(
+                                  str: "Experience ${i + 1}".toUpperCase(),
+                                  bgclr: Colors.white,
+                                  size: 14),
+                              Txt().smalltxt(
+                                  str:
+                                  "Title : ${work.title[i].toString().toUpperCase()}",
+                                  bgclr: Colors.white,
+                                  size: 12),
+                              Txt().smalltxt(
+                                  str:
+                                  "Company Description : ${work.companeydiscription[i].toString().toUpperCase()}",
+                                  bgclr: Colors.white,
+                                  size: 12),
+                              Txt().smalltxt(
+                                  str:
+                                  "Work Place : ${work.workplace[i].toString().toUpperCase()}",
+                                  bgclr: Colors.white,
+                                  size: 12),
+                              Txt().smalltxt(
+                                  str:
+                                  "Company Contact No. : ${work.companey_contact_number[i].toString().toUpperCase()}",
+                                  bgclr: Colors.white,
+                                  size: 12),
+                              Txt().smalltxt(
+                                  str:
+                                  "Reference Name : ${work.refrence_person[i].toString().toUpperCase()}",
+                                  bgclr: Colors.white,
+                                  size: 12),
+                            ],
+                          ),
+                        );
+                      }),
                   Center(
                     child: ElevatedButton(
                       onPressed: () async {
                         await pdfgenerate(
                           img2: data.photo!,
-                          userpersonal,
-                          professional,
                           color: PdfColors.blue200,
                           img: "assets/p1.jpg",
                         );

@@ -16,9 +16,13 @@ class studyprogramlist {
 
   void setstudyprogram(int num, studyprogram study) {
     studyprograms.insert(num, study.studyprograms);
+    studyprograms[num] = study.studyprograms;
     cgpa.insert(num, study.cgpa);
+    cgpa[num] = study.cgpa;
     placeofeducation.insert(num, placeofeducation);
+    placeofeducation[num] = study.placeofeducation;
     project.insert(num, project);
+    project[num] = study.project;
   }
 }
 

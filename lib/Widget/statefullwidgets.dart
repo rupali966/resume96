@@ -127,17 +127,7 @@ class StudyFieldState extends State<StudyField> {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     dismissDirection: DismissDirection.vertical,
                     backgroundColor: Colors.amber.shade900,
-                    content: Container(
-                      height: 100,
-                      child: Column(
-                        children: [
-                          Text("Saving ${cntrstudyprogram.text.toString()}"),
-                          Text("Saving ${cntrplaceofedu.text.toString()}"),
-                          Text("Saving ${cntrcgpa.text.toString()}"),
-                          Text("Saving ${cntrproject.text.toString()}"),
-                        ],
-                      ),
-                    )));
+                    content: Text("Saving ..."),));
                 studyprogram stdypr = studyprogram(
                   cntrstudyprogram.text.toString(),
                   cntrplaceofedu.text.toString(),
@@ -320,10 +310,7 @@ class _WorkFieldState extends State<WorkField> {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     dismissDirection: DismissDirection.vertical,
                     backgroundColor: Colors.amber.shade900,
-                    content: Container(
-                      height: 100,
-                      child: Text("Saving ${cntrwrk.text.toString()}"),
-                    )));
+                    content: Text("Saving ...")));
                 workprogram workpr = workprogram(
                   cntrtitle.text.toString(),
                   cntrwrk.text.toString(),

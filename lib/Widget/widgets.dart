@@ -6,6 +6,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+import 'package:untitled1/Widget/statefullwidgets.dart';
+import 'package:untitled1/modal/studyprogram.dart';
 
 Widget button({
   double tppad = 5,
@@ -245,13 +247,13 @@ Widget image({
   );
 }
 
-dynamic pdfgenerate(
-  List<dynamic> userpersonal,
-  List<dynamic> professional, {
+dynamic pdfgenerate({
   PdfColor? color,
   String img = "",
   File? img2,
 }) async {
+  studyprogramlist study = studyprograms;
+  workprogramlist work = workprograms;
   // final netImage = await networkImage('https://www.nfet.net/nfet.jpg');
 
   // final profileImage1 = pw.MemoryImage(
@@ -308,21 +310,24 @@ dynamic pdfgenerate(
                     ),
                   ),
                 ),
-                for (int i = 0; i < userpersonal.length; i++,)
-                  pw.Container(
-                    margin: pw.EdgeInsets.all(10),
-                    padding: pw.EdgeInsets.all(10),
-                    color: PdfColors.white,
-                    child: pw.Text(
-                      userpersonal[i],
-                      style: const pw.TextStyle(
-                        background: pw.BoxDecoration(
-                          color: PdfColors.white,
+                pw.ListView.builder(
+                    itemCount: study.studyprograms.length,
+                    itemBuilder: (context, i) {
+                      return pw.Container(
+                        margin: pw.EdgeInsets.all(10),
+                        padding: pw.EdgeInsets.all(10),
+                        color: PdfColors.white,
+                        child: pw.Text(
+                          study.studyprograms[i].toString(),
+                          style: const pw.TextStyle(
+                            background: pw.BoxDecoration(
+                              color: PdfColors.white,
+                            ),
+                            fontSize: 20,
+                          ),
                         ),
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
+                      );
+                    }),
               ],
             ),
           ),
@@ -360,21 +365,6 @@ dynamic pdfgenerate(
                     ),
                   ),
                 ),
-                for (int i = 0; i < professional.length; i++)
-                  pw.Container(
-                    padding: pw.EdgeInsets.all(10),
-                    margin: pw.EdgeInsets.all(10),
-                    color: PdfColors.white,
-                    child: pw.Text(
-                      professional[i],
-                      style: const pw.TextStyle(
-                        background: pw.BoxDecoration(
-                          color: PdfColors.white,
-                        ),
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
               ],
             ),
           ),
