@@ -13,7 +13,7 @@ A few resources to get you started if this is your first Flutter project:
 - <img alt="Alt text" src="assets/demo/signup.jpg" title="SignUp Screen" width=200/>
 - <img alt="Alt text" src="assets/demo/login.jpg" title="Login Screen" width=200/>
 - <img alt="Alt text" src="assets/demo/profile.jpg" title="Profile Screen" width=200/>
-- <img alt="Alt text" src="assets/demo/academic.jpg" title="Adding The Details" width=200/>
+- <img alt="Alt text" src="assets/demo/acadmic.jpg" title="Detail Screen" width=200/>
 - <img alt="Alt text" src="assets/demo/type.jpg" title="Select Resume Type Screen" width=200/>
 
 For help getting started with Flutter development, view the
