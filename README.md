@@ -10,7 +10,7 @@ A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-- ![Alt text](assets/demo/signup.jpg "SignUp Screen")
+- <img alt="Alt text" src="assets/demo/signup.jpg" title="SignUp Screen"/>
 - ![Alt text](assets/demo/login.jpg "Login Screen")
 - ![Alt text](assets/demo/profile.jpg "Profile Screen")
 - ![Alt text](assets/demo/acadmic.jpg "Adding The Details")

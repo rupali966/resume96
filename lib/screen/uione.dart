@@ -166,9 +166,11 @@ class _UiOneState extends State<UiOne> {
                     child: ElevatedButton(
                       onPressed: () async {
                         await pdfgenerate(
+                          data,
                           img2: data.photo!,
                           color: PdfColors.blue200,
                           img: "assets/p1.jpg",
+
                         );
                       },
                       child: const Text(

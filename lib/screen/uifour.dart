@@ -179,10 +179,10 @@ class _UiFourState extends State<UiFour> {
                     child: ElevatedButton(
                       onPressed: () async {
                         await pdfgenerate(
+                          data,
                           img2: data.photo!,
-
                           color: PdfColors.blue200,
-                          img: "assets/p1.jpg",
+                          img: "assets/Backgrounds.jpg",
                         );
                       },
                       child: const Text(

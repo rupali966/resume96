@@ -179,9 +179,10 @@ class _UitwoState extends State<Uitwo> {
                     child: ElevatedButton(
                       onPressed: () async {
                         await pdfgenerate(
+                          data,
                           img2: data.photo!,
                           color: PdfColors.blue200,
-                          img: "assets/p1.jpg",
+                          img: "assets/p2.png",
                         );
                       },
                       child: const Text(

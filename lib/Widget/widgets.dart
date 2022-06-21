@@ -7,6 +7,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:untitled1/Widget/statefullwidgets.dart';
+import 'package:untitled1/modal/dataofuser.dart';
 import 'package:untitled1/modal/studyprogram.dart';
 
 Widget button({
@@ -247,13 +248,28 @@ Widget image({
   );
 }
 
-dynamic pdfgenerate({
+dynamic pdfgenerate(
+  User data, {
   PdfColor? color,
   String img = "",
   File? img2,
 }) async {
   studyprogramlist study = studyprograms;
   workprogramlist work = workprograms;
+  List dataof = [
+    data.name,
+    data.adress,
+    data.email,
+    data.phno,
+    data.aboutyourself,
+  ];
+  List dataString = [
+    "Name : ",
+    "Address : ",
+    "Email : ",
+    "Phone Number : ",
+    "About : ",
+  ];
   // final netImage = await networkImage('https://www.nfet.net/nfet.jpg');
 
   // final profileImage1 = pw.MemoryImage(
@@ -282,8 +298,8 @@ dynamic pdfgenerate({
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
                 pw.Container(
-                  padding: pw.EdgeInsets.all(20),
-                  margin: pw.EdgeInsets.all(20),
+                  padding: const pw.EdgeInsets.all(20),
+                  margin: const pw.EdgeInsets.all(20),
                   alignment: pw.Alignment.center,
                   color: PdfColors.white,
                   child: pw.Text(
@@ -310,24 +326,29 @@ dynamic pdfgenerate({
                     ),
                   ),
                 ),
-                pw.ListView.builder(
-                    itemCount: study.studyprograms.length,
-                    itemBuilder: (context, i) {
-                      return pw.Container(
-                        margin: pw.EdgeInsets.all(10),
-                        padding: pw.EdgeInsets.all(10),
-                        color: PdfColors.white,
-                        child: pw.Text(
-                          study.studyprograms[i].toString(),
-                          style: const pw.TextStyle(
-                            background: pw.BoxDecoration(
-                              color: PdfColors.white,
-                            ),
-                            fontSize: 20,
-                          ),
-                        ),
-                      );
-                    }),
+                pw.SizedBox(height: 90),
+                pw.Padding(
+                  padding: pw.EdgeInsets.all(20),
+                  child: pw.ListView.builder(
+                      itemCount: dataof.length,
+                      itemBuilder: (context, i) {
+                        return pw.Align(
+                            alignment: pw.Alignment.centerLeft,
+                            child: pw.Column(
+                                mainAxisAlignment: pw.MainAxisAlignment.start,
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                children: [
+                                  pw.SizedBox(height: 15),
+                                  pw.Text(
+                                    dataString[i].toString() +
+                                        dataof[i].toString(),
+                                    style: const pw.TextStyle(
+                                      fontSize: 22,
+                                    ),
+                                  ),
+                                ]));
+                      }),
+                ),
               ],
             ),
           ),
@@ -340,6 +361,106 @@ dynamic pdfgenerate({
       build: (pw.Context context) {
         return pw.Expanded(
           child: pw.Container(
+            padding: pw.EdgeInsets.all(20),
+            alignment: pw.Alignment.topLeft,
+            decoration: pw.BoxDecoration(
+              image: pw.DecorationImage(
+                image: image,
+              ),
+            ),
+            child: pw.Padding(
+              padding: pw.EdgeInsets.all(20),
+              child: pw.Column(
+                mainAxisAlignment: pw.MainAxisAlignment.start,
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.SizedBox(
+                    height: 70,
+                  ),
+                  pw.Text(
+                    "Educational Details".toUpperCase(),
+                    style: const pw.TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  pw.ListView.builder(
+                      itemCount: study.placeofeducation.length,
+                      itemBuilder: (context, i) {
+                        return pw.Align(
+                          alignment: pw.Alignment.topLeft,
+                          child: pw.Padding(
+                            padding: pw.EdgeInsets.all(20),
+                            child: pw.Column(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  height: 10,
+                                ),
+                                pw.Text(
+                                  "Study Program ${i + 1}".toUpperCase(),
+                                  style: const pw.TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                pw.SizedBox(
+                                  height: 13,
+                                ),
+                                pw.Text(
+                                  "Degree/course : ${study.studyprograms[i].toString().toUpperCase()}",
+                                  style: const pw.TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                pw.SizedBox(
+                                  height: 10,
+                                ),
+                                pw.Text(
+                                  "Place of Education : ${study.placeofeducation[i].toString().toUpperCase()}",
+                                  style: const pw.TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                pw.SizedBox(
+                                  height: 10,
+                                ),
+                                pw.Text(
+                                  "CGPA : ${study.cgpa[i].toString().toUpperCase()}",
+                                  style: const pw.TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                pw.SizedBox(
+                                  height: 10,
+                                ),
+                                pw.Text(
+                                  "Projects : ${study.project[i].toString().toUpperCase()}",
+                                  style: const pw.TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                pw.SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    ),
+  );
+  pdf.addPage(
+    pw.Page(
+      build: (pw.Context context) {
+        return pw.Expanded(
+          child: pw.Container(
+            padding: pw.EdgeInsets.all(20),
             alignment: pw.Alignment.topLeft,
             decoration: pw.BoxDecoration(
               image: pw.DecorationImage(
@@ -350,21 +471,88 @@ dynamic pdfgenerate({
               mainAxisAlignment: pw.MainAxisAlignment.start,
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
-                pw.Container(
-                  margin: pw.EdgeInsets.all(20),
-                  alignment: pw.Alignment.center,
-                  padding: pw.EdgeInsets.all(20),
-                  color: PdfColors.white,
-                  child: pw.Text(
-                    "Professional details",
-                    style: const pw.TextStyle(
-                      background: pw.BoxDecoration(
-                        color: PdfColors.white,
-                      ),
-                      fontSize: 28,
-                    ),
+                pw.SizedBox(
+                  height: 70,
+                ),
+                pw.Text(
+                  "Educational Details".toUpperCase(),
+                  style: const pw.TextStyle(
+                    fontSize: 18,
                   ),
                 ),
+                pw.ListView.builder(
+                    itemCount: study.placeofeducation.length,
+                    itemBuilder: (context, i) {
+                      return pw.Align(
+                        alignment: pw.Alignment.topLeft,
+                        child: pw.Padding(
+                          padding: pw.EdgeInsets.all(20),
+                          child: pw.Column(
+                            mainAxisAlignment: pw.MainAxisAlignment.start,
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            children: [
+                              pw.SizedBox(
+                                height: 10,
+                              ),
+                              pw.Text(
+                                "Experience ${i + 1}".toUpperCase(),
+                                style: const pw.TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                              pw.SizedBox(
+                                height: 13,
+                              ),
+                              pw.Text(
+                                "Title : ${work.title[i].toString().toUpperCase()}",
+                                style: const pw.TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                              pw.SizedBox(
+                                height: 10,
+                              ),
+                              pw.Text(
+                                "Work Place : ${work.workplace[i].toString().toUpperCase()}",
+                                style: const pw.TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                              pw.SizedBox(
+                                height: 10,
+                              ),
+                              pw.Text(
+                                "Company Description : ${work.companeydiscription[i].toString().toUpperCase()}",
+                                style: const pw.TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                              pw.SizedBox(
+                                height: 10,
+                              ),
+                              pw.Text(
+                                "Company Contact Number : ${work.companey_contact_number[i].toString().toUpperCase()}",
+                                style: const pw.TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                              pw.SizedBox(
+                                height: 10,
+                              ),
+                              pw.Text(
+                                "Reference Person : ${work.refrence_person[i].toString().toUpperCase()}",
+                                style: const pw.TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                              pw.SizedBox(
+                                height: 10,
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
               ],
             ),
           ),

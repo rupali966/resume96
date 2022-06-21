@@ -179,9 +179,10 @@ class _UithreeState extends State<Uithree> {
                     child: ElevatedButton(
                       onPressed: () async {
                         await pdfgenerate(
+                          data,
                           img2: data.photo!,
                           color: PdfColors.blue200,
-                          img: "assets/p1.jpg",
+                          img: "assets/p3.png",
                         );
                       },
                       child: const Text(
